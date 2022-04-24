@@ -2,19 +2,21 @@ package io.srmppn.HappyDorm.payment.api;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
+import java.util.UUID;
+
 public class TransactionVerification {
     public static class VerifyTransactionCommand {
 
         @TargetAggregateIdentifier
-        public String transactionId;
+        public UUID transactionId;
         public String paymentSecret;
 
-        public VerifyTransactionCommand(String transactionId, String paymentSecret) {
+        public VerifyTransactionCommand(UUID transactionId, String paymentSecret) {
             this.transactionId = transactionId;
             this.paymentSecret = paymentSecret;
         }
 
-        public String getTransactionId() {
+        public UUID getTransactionId() {
             return transactionId;
         }
 
@@ -25,19 +27,19 @@ public class TransactionVerification {
 
     public static class TransactionVerifiedEvent {
 
-        public String transactionId;
-        public String billId;
+        public UUID transactionId;
+        public UUID billId;
 
-        public TransactionVerifiedEvent(String transactionId, String billId) {
+        public TransactionVerifiedEvent(UUID transactionId, UUID billId) {
             this.transactionId = transactionId;
             this.billId = billId;
         }
 
-        public String getTransactionId() {
+        public UUID getTransactionId() {
             return transactionId;
         }
 
-        public String getBillId() {
+        public UUID getBillId() {
             return billId;
         }
     }

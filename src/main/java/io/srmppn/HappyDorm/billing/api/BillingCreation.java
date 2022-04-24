@@ -1,116 +1,70 @@
 package io.srmppn.HappyDorm.billing.api;
 
+import io.srmppn.HappyDorm.billing.command.BillingSummary;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
-import java.math.BigDecimal;
 import java.time.Duration;
+import java.util.UUID;
 
 public class BillingCreation {
 
-    public static class CreateBillCommand {
+    public static class CreateBillCommand<T extends BillingSummary> {
 
         @TargetAggregateIdentifier
-        public String billId;
-        public String roomId;
+        public UUID billId;
+        public UUID roomId;
 
-        public double electricityUsage;
-        public double waterUsage;
+        public T summary;
 
-        public CreateBillCommand(String billId, String roomId, double electricityUsage, double waterUsage) {
+        public CreateBillCommand(UUID billId, UUID roomId, T summary) {
             this.billId = billId;
             this.roomId = roomId;
-            this.electricityUsage = electricityUsage;
-            this.waterUsage = waterUsage;
+            this.summary = summary;
         }
 
-        public String getBillId() {
+        public UUID getBillId() {
             return billId;
         }
 
-        public String getRoomId() {
+        public UUID getRoomId() {
             return roomId;
         }
 
-        public double getElectricityUsage() {
-            return electricityUsage;
-        }
-
-        public double getWaterUsage() {
-            return waterUsage;
+        public T getSummary() {
+            return summary;
         }
     }
 
-    public static class BillCreatedEvent {
+    public static class BillCreatedEvent<T extends BillingSummary> {
 
-        public String billId;
-        public String roomId;
-        public BigDecimal paymentAmount;
+        public UUID billId;
+        public UUID roomId;
+
+        public T summary;
+
         public Duration expiry;
 
-        public BillCreatedEvent(String billId, String roomId, BigDecimal paymentAmount, Duration expiry) {
+        public BillCreatedEvent(UUID billId, UUID roomId, T summary, Duration expiry) {
             this.billId = billId;
             this.roomId = roomId;
-            this.paymentAmount = paymentAmount;
+            this.summary = summary;
             this.expiry = expiry;
         }
 
-        public String getBillId() {
+        public UUID getBillId() {
             return billId;
         }
 
-        public void setBillId(String billId) {
-            this.billId = billId;
-        }
-
-        public String getRoomId() {
+        public UUID getRoomId() {
             return roomId;
         }
 
-        public void setRoomId(String roomId) {
-            this.roomId = roomId;
+        public T getSummary() {
+            return summary;
         }
 
         public Duration getExpiry() {
             return expiry;
-        }
-
-        public void setExpiry(Duration expiry) {
-            this.expiry = expiry;
-        }
-
-        public BigDecimal getPaymentAmount() {
-            return paymentAmount;
-        }
-
-        public void setPaymentAmount(BigDecimal paymentAmount) {
-            this.paymentAmount = paymentAmount;
-        }
-    }
-
-    public static class BillExpiredEvent {
-
-        public String billId;
-        public String roomId;
-
-        public BillExpiredEvent(String billId, String roomId) {
-            this.billId = billId;
-            this.roomId = roomId;
-        }
-
-        public String getBillId() {
-            return billId;
-        }
-
-        public void setBillId(String billId) {
-            this.billId = billId;
-        }
-
-        public String getRoomId() {
-            return roomId;
-        }
-
-        public void setRoomId(String roomId) {
-            this.roomId = roomId;
         }
     }
 }

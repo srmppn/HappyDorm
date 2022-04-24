@@ -2,36 +2,75 @@ package io.srmppn.HappyDorm.room.api;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
+import java.util.UUID;
+
 public class RoomReservation {
     public static class ReserveRoomCommand {
         @TargetAggregateIdentifier
-        private String roomId;
+        private UUID roomId;
+        private UUID accountId;
 
-        public ReserveRoomCommand(String roomId) {
+        public ReserveRoomCommand(UUID roomId, UUID accountId) {
             this.roomId = roomId;
+            this.accountId = accountId;
         }
 
-        public String getRoomId() {
+        public UUID getRoomId() {
             return roomId;
         }
 
-        public void setRoomId(String roomId) {
-            this.roomId = roomId;
+        public UUID getAccountId() {
+            return accountId;
         }
     }
 
     public static class RoomReservedEvent {
-        private String roomId;
+        private UUID roomId;
+        private UUID accountId;
 
-        public RoomReservedEvent(String roomId) {
+        public RoomReservedEvent(UUID roomId, UUID accountId) {
             this.roomId = roomId;
+            this.accountId = accountId;
         }
 
-        public String getRoomId() {
+        public UUID getRoomId() {
             return roomId;
         }
 
-        public void setRoomId(String roomId) {
+        public void setRoomId(UUID roomId) {
+            this.roomId = roomId;
+        }
+
+        public UUID getAccountId() {
+            return accountId;
+        }
+    }
+
+    public static class UnreserveRoomCommand {
+        @TargetAggregateIdentifier
+        private UUID roomId;
+
+        public UnreserveRoomCommand(UUID roomId) {
+            this.roomId = roomId;
+        }
+
+        public UUID getRoomId() {
+            return roomId;
+        }
+    }
+
+    public static class RoomUnreservedEvent {
+        private UUID roomId;
+
+        public RoomUnreservedEvent(UUID roomId) {
+            this.roomId = roomId;
+        }
+
+        public UUID getRoomId() {
+            return roomId;
+        }
+
+        public void setRoomId(UUID roomId) {
             this.roomId = roomId;
         }
     }

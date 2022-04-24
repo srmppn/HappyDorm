@@ -11,11 +11,13 @@ import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 
+import java.util.UUID;
+
 @Aggregate
 public class TransactionAggregate {
     @AggregateIdentifier
-    private String transactionId;
-    private String billId;
+    private UUID transactionId;
+    private UUID billId;
     private Payment payment;
     private boolean isPaymentVerified = false;
 

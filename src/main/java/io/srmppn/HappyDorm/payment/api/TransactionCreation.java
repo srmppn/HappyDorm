@@ -4,23 +4,24 @@ import io.srmppn.HappyDorm.payment.service.dummy.Payment;
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
 import java.math.BigDecimal;
+import java.util.UUID;
 
 public class TransactionCreation {
 
     public static class CreateTransactionCommand {
 
         @TargetAggregateIdentifier
-        public String transactionId;
-        public String billId;
+        public UUID transactionId;
+        public UUID billId;
         public BigDecimal paymentAmount;
 
-        public CreateTransactionCommand(String transactionId, String billId, BigDecimal paymentAmount) {
+        public CreateTransactionCommand(UUID transactionId, UUID billId, BigDecimal paymentAmount) {
             this.transactionId = transactionId;
             this.billId = billId;
             this.paymentAmount = paymentAmount;
         }
 
-        public String getTransactionId() {
+        public UUID getTransactionId() {
             return transactionId;
         }
 
@@ -28,29 +29,29 @@ public class TransactionCreation {
             return paymentAmount;
         }
 
-        public String getBillId() {
+        public UUID getBillId() {
             return billId;
         }
     }
 
     public static class TransactionCreatedEvent {
 
-        public String transactionId;
-        public String billId;
+        public UUID transactionId;
+        public UUID billId;
         public Payment payment;
 
-        public TransactionCreatedEvent(String transactionId, String billId, Payment payment) {
+        public TransactionCreatedEvent(UUID transactionId, UUID billId, Payment payment) {
             this.transactionId = transactionId;
             this.billId = billId;
             this.payment = payment;
         }
 
 
-        public String getTransactionId() {
+        public UUID getTransactionId() {
             return transactionId;
         }
 
-        public String getBillId() {
+        public UUID getBillId() {
             return billId;
         }
 

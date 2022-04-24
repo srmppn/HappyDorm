@@ -8,10 +8,12 @@ import org.axonframework.modelling.command.AggregateIdentifier;
 import org.axonframework.modelling.command.AggregateLifecycle;
 import org.axonframework.spring.stereotype.Aggregate;
 
+import java.util.UUID;
+
 @Aggregate
 public class RoomAggregate {
     @AggregateIdentifier
-    public String roomId;
+    public UUID roomId;
 
     public boolean isReserved;
 
@@ -33,11 +35,25 @@ public class RoomAggregate {
 
     @CommandHandler
     public void handle(ReserveRoomCommand command) {
-        AggregateLifecycle.apply(new RoomReservedEvent(command.getRoomId()));
+        if (isReserved) {
+            throw new IllegalArgumentException("Room is already reserved");
+        }
+        AggregateLifecycle.apply(new RoomReservedEvent(command.getRoomId(),
+                                                       command.getAccountId()));
     }
 
     @EventSourcingHandler
     public void on(RoomReservedEvent event) {
         isReserved = true;
+    }
+
+    @CommandHandler
+    public void handle(UnreserveRoomCommand command) {
+        AggregateLifecycle.apply(new RoomUnreservedEvent(command.getRoomId()));
+    }
+
+    @EventSourcingHandler
+    public void on(RoomUnreservedEvent event) {
+        isReserved = false;
     }
 }

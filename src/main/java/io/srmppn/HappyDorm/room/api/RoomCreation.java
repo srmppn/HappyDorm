@@ -2,37 +2,39 @@ package io.srmppn.HappyDorm.room.api;
 
 import org.axonframework.modelling.command.TargetAggregateIdentifier;
 
+import java.util.UUID;
+
 public class RoomCreation {
 
     public static class CreateRoomCommand {
         @TargetAggregateIdentifier
-        private String roomId;
+        private UUID roomId;
 
-        public CreateRoomCommand(String roomId) {
+        public CreateRoomCommand(UUID roomId) {
             this.roomId = roomId;
         }
 
-        public String getRoomId() {
+        public UUID getRoomId() {
             return roomId;
         }
 
-        public void setRoomId(String roomId) {
+        public void setRoomId(UUID roomId) {
             this.roomId = roomId;
         }
     }
 
     public static class RoomCreatedEvent {
-        private String roomId;
+        private UUID roomId;
 
-        public RoomCreatedEvent(String roomId) {
+        public RoomCreatedEvent(UUID roomId) {
             this.roomId = roomId;
         }
 
-        public String getRoomId() {
+        public UUID getRoomId() {
             return roomId;
         }
 
-        public void setRoomId(String roomId) {
+        public void setRoomId(UUID roomId) {
             this.roomId = roomId;
         }
     }
