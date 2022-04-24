@@ -3,4 +3,6 @@ Happy dorm application for managing dorm or apartment. I build this application 
 
 ### Tech stack:
 - **Axonframework**
-- **Springframework - Spring Security, Spring Webflux, Spring Data Mongo
+- **Springframework - Spring Security, Spring Webflux, Spring Data Mongo**
+
+### Boundary Context
