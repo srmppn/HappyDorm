@@ -27,12 +27,7 @@ public class Bill {
         this.status = status;
     }
 
-    public Bill expired() {
-        setStatus(BillStatus.Expired);
-        return this;
-    }
-
-    public Bill paid() {
+    public Bill verify() {
         setStatus(BillStatus.Verified);
         return this;
     }

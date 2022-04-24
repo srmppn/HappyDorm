@@ -1,4 +1,4 @@
-package io.srmppn.HappyDorm.payment.service;
+package io.srmppn.HappyDorm.billing.service;
 
 public class InvalidPaymentException extends IllegalArgumentException {
     public final static String DEFAULT_EXCEPTION_MSG = "Invalid payment parameters";

@@ -1,6 +1,7 @@
 package io.srmppn.HappyDorm.room.query;
 
 import io.srmppn.HappyDorm.room.api.RoomCreation.*;
+import io.srmppn.HappyDorm.room.api.RoomPaymentScheduling.*;
 import io.srmppn.HappyDorm.room.api.RoomReservation.*;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +32,15 @@ public class RoomProjection {
     @EventHandler
     public void on(RoomUnreservedEvent event) {
         roomRepository.findById(event.getRoomId())
-                      .map(room -> room.unreserve())
+                      .map(Room::unreserve)
+                      .flatMap(roomRepository::save)
+                      .block();
+    }
+
+    @EventHandler
+    public void on(RoomRentedEvent event) {
+        roomRepository.findById(event.getRoomId())
+                      .map(Room::rent)
                       .flatMap(roomRepository::save)
                       .block();
     }

@@ -51,4 +51,9 @@ public class Room {
         setStatus(RoomStatus.Available);
         return this;
     }
+
+    public Room rent() {
+        setStatus(RoomStatus.Rent);
+        return this;
+    }
 }

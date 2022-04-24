@@ -1,7 +1,7 @@
 package io.srmppn.HappyDorm.billing.query;
 
-import io.srmppn.HappyDorm.billing.api.BillPayment.*;
 import io.srmppn.HappyDorm.billing.api.BillingCreation.BillCreatedEvent;
+import io.srmppn.HappyDorm.billing.api.PaymentVerification.PaymentVerifiedEvent;
 import org.axonframework.eventhandling.EventHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -21,16 +21,9 @@ public class BillProjection {
     }
 
     @EventHandler
-    public void on(BillExpiredEvent event) {
+    public void on(PaymentVerifiedEvent event) {
         billRepository.findById(event.getBillId())
-                      .map(Bill::expired)
-                      .block();
-    }
-
-    @EventHandler
-    public void on(BillPaidEvent event) {
-        billRepository.findById(event.getBillId())
-                      .map(Bill::paid)
+                      .map(Bill::verify)
                       .block();
     }
 }

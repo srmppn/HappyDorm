@@ -36,7 +36,7 @@ public class RoomAggregate {
     @CommandHandler
     public void handle(ReserveRoomCommand command) {
         if (isReserved) {
-            throw new IllegalArgumentException("Room is already reserved");
+            throw new RoomAlreadyReservedException();
         }
         AggregateLifecycle.apply(new RoomReservedEvent(command.getRoomId(),
                                                        command.getAccountId()));

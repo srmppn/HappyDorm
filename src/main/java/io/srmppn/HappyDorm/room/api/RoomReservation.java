@@ -74,4 +74,21 @@ public class RoomReservation {
             this.roomId = roomId;
         }
     }
+
+    public static class RoomReservationExpiredEvent {
+        private UUID roomId;
+
+        public RoomReservationExpiredEvent(UUID roomId) {
+            this.roomId = roomId;
+        }
+
+        public UUID getRoomId() {
+            return roomId;
+        }
+
+        public void setRoomId(UUID roomId) {
+            this.roomId = roomId;
+        }
+
+    }
 }

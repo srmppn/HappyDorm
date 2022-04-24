@@ -40,7 +40,7 @@ public class AccountAggregate {
     @CommandHandler
     public void handle(AssignRoomCommand command) {
         if (hasRoom()){
-            throw new RoomAlreadyAssignException();
+            throw new RoomAlreadyAssignedException();
         }
         AggregateLifecycle.apply(new RoomAssignedEvent(command.getAccountId(),
                                                        command.getRoomId()));
@@ -49,6 +49,16 @@ public class AccountAggregate {
     @EventSourcingHandler
     public void on(RoomAssignedEvent event) {
         roomId = event.getRoomId();
+    }
+
+    @CommandHandler
+    public void handle(UnAssignRoomCommand command) {
+        AggregateLifecycle.apply(new RoomUnAssignedEvent(command.getAccountId()));
+    }
+
+    @EventSourcingHandler
+    public void on(RoomUnAssignedEvent event) {
+        roomId = null;
     }
 
     public boolean hasRoom() {
