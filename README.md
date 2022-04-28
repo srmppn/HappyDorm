@@ -1,5 +1,5 @@
 # HappyDorm
-Happy dorm application for managing dorm or apartment. I build this application based on DDD concept for learning purpose.
+Happy dorm application for managing dorm or apartment. This application based on Event-driven architecture using CQRS with Event-sourcing and also apply Domain-driven design concept.
 
 ### Tech stack:
 - **Axonframework**
